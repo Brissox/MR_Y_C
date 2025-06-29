@@ -29,5 +29,8 @@ public class resenasServices {
 
     }
 
+    public void EliminarResena(Long id_resena){
+        resenarepository.deleteById(id_resena);
+    }
 
 }

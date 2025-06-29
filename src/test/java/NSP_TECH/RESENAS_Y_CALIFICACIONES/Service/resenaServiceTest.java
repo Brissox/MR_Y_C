@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -110,19 +112,43 @@ public class resenaServiceTest {
     }
 
 
-/*
 
     @Test
-    public void testEliminarEnvio(){
+    public void testEditarResena(){
+
+        resenas reseO = new resenas();
+        reseO.setId_resena(11L);
+        reseO.setCalificacion(1);
+        reseO.setComentario("Malo");
+
+        resenas resE = new resenas();
+        resE.setId_resena(11L);
+        resE.setCalificacion(4);
+        resE.setComentario("Bueno");
+
+        when(resenarepository.save(any(resenas.class))).thenReturn(resE);
+        when(resenarepository.existsById(11L)).thenReturn(true);
+        resenas resultado = resenaservices.GuardarResenas(resE);
+
+        assertNotNull(resultado);
+        assertEquals(11L, resultado.getId_resena());
+        assertEquals(4, resultado.getCalificacion());
+        assertEquals("Bueno", resultado.getComentario());
+
+        verify(resenarepository, times(1)).save(resE);
+    }
+
+    @Test
+    public void testEliminarResena(){
         Long id = 11L;
-        doNothing().when(enviorepository).deleteById(id);
+        doNothing().when(resenarepository).deleteById(id);
 
-        enviosservices.Eliminar***(id);
+        resenaservices.EliminarResena(11L);
 
-        verify(enviosrepository.times(1)).deleteById(id);
+        verify(resenarepository, times(1)).deleteById(id);
 
     }
-*/
+
 }
 
 
